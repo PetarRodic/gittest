@@ -1,0 +1,4 @@
+CREATE USER [Petar]
+	FOR LOGIN [Petar]
+	WITH DEFAULT_SCHEMA = [dbo]
+GO
