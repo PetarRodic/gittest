@@ -6,8 +6,8 @@ CREATE TABLE [Sales].[SpecialOffer] (
 		[SpecialOfferID]     [int] IDENTITY(1, 1) NOT NULL,
 		[Description]        [nvarchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 		[DiscountPct]        [smallmoney] NOT NULL,
-		[Type]               [nvarchar](56) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-		[Category]           [nvarchar](52) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+		[Type]               [nvarchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+		[Category]           [nvarchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 		[StartDate]          [datetime] NOT NULL,
 		[EndDate]            [datetime] NOT NULL,
 		[MinQty]             [int] NOT NULL,
@@ -24,7 +24,9 @@ ALTER TABLE [Sales].[SpecialOffer]
 	([SpecialOfferID])
 	ON [PRIMARY]
 GO
-EXEC sp_addextendedproperty N'MS_Description', N'Clustered index created by a primary key constraint.', 'SCHEMA', N'Sales', 'TABLE', N'SpecialOffer', 'CONSTRAINT', N'PK_SpecialOffer_SpecialOfferID'
+EXEC sp_addextendedproperty N'MS_Description', N'Primary key (clustered) constraint', 'SCHEMA', N'Sales', 'TABLE', N'SpecialOffer', 'CONSTRAINT', N'PK_SpecialOffer_SpecialOfferID'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Clustered index created by a primary key constraint.', 'SCHEMA', N'Sales', 'TABLE', N'SpecialOffer', 'INDEX', N'PK_SpecialOffer_SpecialOfferID'
 GO
 ALTER TABLE [Sales].[SpecialOffer]
 	ADD
@@ -75,20 +77,28 @@ ALTER TABLE [Sales].[SpecialOffer]
 	CONSTRAINT [DF_SpecialOffer_DiscountPct]
 	DEFAULT ((0.00)) FOR [DiscountPct]
 GO
+EXEC sp_addextendedproperty N'MS_Description', N'Default constraint value of 0.0', 'SCHEMA', N'Sales', 'TABLE', N'SpecialOffer', 'CONSTRAINT', N'DF_SpecialOffer_DiscountPct'
+GO
 ALTER TABLE [Sales].[SpecialOffer]
 	ADD
 	CONSTRAINT [DF_SpecialOffer_MinQty]
 	DEFAULT ((0)) FOR [MinQty]
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Default constraint value of 0.0', 'SCHEMA', N'Sales', 'TABLE', N'SpecialOffer', 'CONSTRAINT', N'DF_SpecialOffer_MinQty'
 GO
 ALTER TABLE [Sales].[SpecialOffer]
 	ADD
 	CONSTRAINT [DF_SpecialOffer_ModifiedDate]
 	DEFAULT (getdate()) FOR [ModifiedDate]
 GO
+EXEC sp_addextendedproperty N'MS_Description', N'Default constraint value of GETDATE()', 'SCHEMA', N'Sales', 'TABLE', N'SpecialOffer', 'CONSTRAINT', N'DF_SpecialOffer_ModifiedDate'
+GO
 ALTER TABLE [Sales].[SpecialOffer]
 	ADD
 	CONSTRAINT [DF_SpecialOffer_rowguid]
 	DEFAULT (newid()) FOR [rowguid]
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Default constraint value of NEWID()', 'SCHEMA', N'Sales', 'TABLE', N'SpecialOffer', 'CONSTRAINT', N'DF_SpecialOffer_rowguid'
 GO
 CREATE UNIQUE NONCLUSTERED INDEX [AK_SpecialOffer_rowguid]
 	ON [Sales].[SpecialOffer] ([rowguid])

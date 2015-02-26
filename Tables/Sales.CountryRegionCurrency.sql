@@ -4,7 +4,7 @@ SET ANSI_PADDING ON
 GO
 CREATE TABLE [Sales].[CountryRegionCurrency] (
 		[CountryRegionCode]     [nvarchar](3) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-		[CurrencyCode]          [nchar](6) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+		[CurrencyCode]          [nchar](3) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 		[ModifiedDate]          [datetime] NOT NULL
 ) ON [PRIMARY]
 GO
@@ -16,12 +16,16 @@ ALTER TABLE [Sales].[CountryRegionCurrency]
 	([CountryRegionCode], [CurrencyCode])
 	ON [PRIMARY]
 GO
-EXEC sp_addextendedproperty N'MS_Description', N'Clustered index created by a primary key constraint.', 'SCHEMA', N'Sales', 'TABLE', N'CountryRegionCurrency', 'CONSTRAINT', N'PK_CountryRegionCurrency_CountryRegionCode_CurrencyCode'
+EXEC sp_addextendedproperty N'MS_Description', N'Primary key (clustered) constraint', 'SCHEMA', N'Sales', 'TABLE', N'CountryRegionCurrency', 'CONSTRAINT', N'PK_CountryRegionCurrency_CountryRegionCode_CurrencyCode'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Clustered index created by a primary key constraint.', 'SCHEMA', N'Sales', 'TABLE', N'CountryRegionCurrency', 'INDEX', N'PK_CountryRegionCurrency_CountryRegionCode_CurrencyCode'
 GO
 ALTER TABLE [Sales].[CountryRegionCurrency]
 	ADD
 	CONSTRAINT [DF_CountryRegionCurrency_ModifiedDate]
 	DEFAULT (getdate()) FOR [ModifiedDate]
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Default constraint value of GETDATE()', 'SCHEMA', N'Sales', 'TABLE', N'CountryRegionCurrency', 'CONSTRAINT', N'DF_CountryRegionCurrency_ModifiedDate'
 GO
 ALTER TABLE [Sales].[CountryRegionCurrency]
 	WITH CHECK

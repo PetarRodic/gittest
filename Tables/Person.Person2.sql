@@ -6,7 +6,7 @@ CREATE TABLE [Person].[Person2] (
 		[BusinessEntityID]          [int] NOT NULL,
 		[PersonType]                [nchar](2) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 		[NameStyle]                 [dbo].[NameStyle] NOT NULL,
-		[Titles]                    [nvarchar](8) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+		[Title]                     [nvarchar](8) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
 		[FirstName]                 [dbo].[Name] NOT NULL,
 		[MiddleName]                [dbo].[Name] NULL,
 		[LastName]                  [dbo].[Name] NOT NULL,
@@ -124,7 +124,7 @@ EXEC sp_addextendedproperty N'MS_Description', N'ROWGUIDCOL number uniquely iden
 GO
 EXEC sp_addextendedproperty N'MS_Description', N'Surname suffix. For example, Sr. or Jr.', 'SCHEMA', N'Person', 'TABLE', N'Person2', 'COLUMN', N'Suffix'
 GO
-EXEC sp_addextendedproperty N'MS_Description', N'A courtesy title. For example, Mr. or Ms.', 'SCHEMA', N'Person', 'TABLE', N'Person2', 'COLUMN', N'Titles'
+EXEC sp_addextendedproperty N'MS_Description', N'A courtesy title. For example, Mr. or Ms.', 'SCHEMA', N'Person', 'TABLE', N'Person2', 'COLUMN', N'Title'
 GO
 EXEC sp_addextendedproperty N'MS_Description', N'Human beings involved with AdventureWorks: employees, customer contacts, and vendor contacts.', 'SCHEMA', N'Person', 'TABLE', N'Person2', NULL, NULL
 GO

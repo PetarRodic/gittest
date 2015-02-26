@@ -6,9 +6,8 @@ CREATE TABLE [HumanResources].[Department] (
 		[DepartmentID]     [smallint] IDENTITY(1, 1) NOT NULL,
 		[Name]             [dbo].[Name] NOT NULL,
 		[GroupName]        [dbo].[Name] NOT NULL,
-		[ModifiedDate]     [datetime] NOT NULL,
-		[Location]         [nvarchar](max) COLLATE SQL_Latin1_General_CP1_CI_AS NULL
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+		[ModifiedDate]     [datetime] NOT NULL
+) ON [PRIMARY]
 GO
 ALTER TABLE [HumanResources].[Department]
 	ADD

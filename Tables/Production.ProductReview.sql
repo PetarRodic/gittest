@@ -67,6 +67,12 @@ CREATE NONCLUSTERED INDEX [IX_ProductReview_ProductID_Name]
 GO
 EXEC sp_addextendedproperty N'MS_Description', N'Nonclustered index.', 'SCHEMA', N'Production', 'TABLE', N'ProductReview', 'INDEX', N'IX_ProductReview_ProductID_Name'
 GO
+CREATE FULLTEXT INDEX ON [Production].[ProductReview]
+	([Comments] LANGUAGE 1033)
+	KEY INDEX [PK_ProductReview_ProductReviewID]
+	ON (FILEGROUP [PRIMARY], [AW2008FullTextCatalog])
+	WITH CHANGE_TRACKING AUTO, STOPLIST SYSTEM
+GO
 EXEC sp_addextendedproperty N'MS_Description', N'Reviewer''s comments', 'SCHEMA', N'Production', 'TABLE', N'ProductReview', 'COLUMN', N'Comments'
 GO
 EXEC sp_addextendedproperty N'MS_Description', N'Reviewer''s e-mail address.', 'SCHEMA', N'Production', 'TABLE', N'ProductReview', 'COLUMN', N'EmailAddress'

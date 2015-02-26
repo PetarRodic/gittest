@@ -3,7 +3,7 @@ SET QUOTED_IDENTIFIER ON
 SET ANSI_PADDING ON
 GO
 CREATE TABLE [Sales].[Currency] (
-		[CurrencyCode]     [nchar](6) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+		[CurrencyCode]     [nchar](3) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 		[Name]             [dbo].[Name] NOT NULL,
 		[ModifiedDate]     [datetime] NOT NULL
 ) ON [PRIMARY]
@@ -16,12 +16,16 @@ ALTER TABLE [Sales].[Currency]
 	([CurrencyCode])
 	ON [PRIMARY]
 GO
-EXEC sp_addextendedproperty N'MS_Description', N'Clustered index created by a primary key constraint.', 'SCHEMA', N'Sales', 'TABLE', N'Currency', 'CONSTRAINT', N'PK_Currency_CurrencyCode'
+EXEC sp_addextendedproperty N'MS_Description', N'Primary key (clustered) constraint', 'SCHEMA', N'Sales', 'TABLE', N'Currency', 'CONSTRAINT', N'PK_Currency_CurrencyCode'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Clustered index created by a primary key constraint.', 'SCHEMA', N'Sales', 'TABLE', N'Currency', 'INDEX', N'PK_Currency_CurrencyCode'
 GO
 ALTER TABLE [Sales].[Currency]
 	ADD
 	CONSTRAINT [DF_Currency_ModifiedDate]
 	DEFAULT (getdate()) FOR [ModifiedDate]
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Default constraint value of GETDATE()', 'SCHEMA', N'Sales', 'TABLE', N'Currency', 'CONSTRAINT', N'DF_Currency_ModifiedDate'
 GO
 CREATE UNIQUE NONCLUSTERED INDEX [AK_Currency_Name]
 	ON [Sales].[Currency] ([Name])

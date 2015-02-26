@@ -6,13 +6,12 @@ CREATE TABLE [Person].[Address] (
 		[AddressID]           [int] IDENTITY(1, 1) NOT FOR REPLICATION NOT NULL,
 		[AddressLine1]        [nvarchar](60) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 		[AddressLine2]        [nvarchar](60) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-		[City]                [nvarchar](34) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+		[City]                [nvarchar](30) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 		[StateProvinceID]     [int] NOT NULL,
 		[PostalCode]          [nvarchar](15) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 		[SpatialLocation]     [geography] NULL,
 		[rowguid]             [uniqueidentifier] NOT NULL ROWGUIDCOL,
-		[ModifiedDate]        [datetime] NOT NULL,
-		[Province]            [nvarchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL
+		[ModifiedDate]        [datetime] NOT NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 ALTER TABLE [Person].[Address]
@@ -23,17 +22,23 @@ ALTER TABLE [Person].[Address]
 	([AddressID])
 	ON [PRIMARY]
 GO
-EXEC sp_addextendedproperty N'MS_Description', N'Clustered index created by a primary key constraint.', 'SCHEMA', N'Person', 'TABLE', N'Address', 'CONSTRAINT', N'PK_Address_AddressID'
+EXEC sp_addextendedproperty N'MS_Description', N'Primary key (clustered) constraint', 'SCHEMA', N'Person', 'TABLE', N'Address', 'CONSTRAINT', N'PK_Address_AddressID'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Clustered index created by a primary key constraint.', 'SCHEMA', N'Person', 'TABLE', N'Address', 'INDEX', N'PK_Address_AddressID'
 GO
 ALTER TABLE [Person].[Address]
 	ADD
 	CONSTRAINT [DF_Address_ModifiedDate]
 	DEFAULT (getdate()) FOR [ModifiedDate]
 GO
+EXEC sp_addextendedproperty N'MS_Description', N'Default constraint value of GETDATE()', 'SCHEMA', N'Person', 'TABLE', N'Address', 'CONSTRAINT', N'DF_Address_ModifiedDate'
+GO
 ALTER TABLE [Person].[Address]
 	ADD
 	CONSTRAINT [DF_Address_rowguid]
 	DEFAULT (newid()) FOR [rowguid]
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Default constraint value of NEWID()', 'SCHEMA', N'Person', 'TABLE', N'Address', 'CONSTRAINT', N'DF_Address_rowguid'
 GO
 ALTER TABLE [Person].[Address]
 	WITH CHECK
