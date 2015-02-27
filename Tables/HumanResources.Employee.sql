@@ -141,6 +141,16 @@ ALTER TABLE [HumanResources].[Employee]
 GO
 EXEC sp_addextendedproperty N'MS_Description', N'Default constraint value of 0', 'SCHEMA', N'HumanResources', 'TABLE', N'Employee', 'CONSTRAINT', N'DF_Employee_VacationHours'
 GO
+ALTER TABLE [HumanResources].[Employee]
+	WITH CHECK
+	ADD CONSTRAINT [FK_Employee_Person_BusinessEntityID]
+	FOREIGN KEY ([BusinessEntityID]) REFERENCES [Person].[Person2] ([BusinessEntityID])
+ALTER TABLE [HumanResources].[Employee]
+	CHECK CONSTRAINT [FK_Employee_Person_BusinessEntityID]
+
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing Person.BusinessEntityID.', 'SCHEMA', N'HumanResources', 'TABLE', N'Employee', 'CONSTRAINT', N'FK_Employee_Person_BusinessEntityID'
+GO
 CREATE UNIQUE NONCLUSTERED INDEX [AK_Employee_LoginID]
 	ON [HumanResources].[Employee] ([LoginID])
 	ON [PRIMARY]

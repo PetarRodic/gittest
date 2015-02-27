@@ -61,6 +61,16 @@ ALTER TABLE [HumanResources].[EmployeeDepartmentHistory]
 GO
 EXEC sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing Employee.EmployeeID.', 'SCHEMA', N'HumanResources', 'TABLE', N'EmployeeDepartmentHistory', 'CONSTRAINT', N'FK_EmployeeDepartmentHistory_Employee_BusinessEntityID'
 GO
+ALTER TABLE [HumanResources].[EmployeeDepartmentHistory]
+	WITH CHECK
+	ADD CONSTRAINT [FK_EmployeeDepartmentHistory_Shift_ShiftID]
+	FOREIGN KEY ([ShiftID]) REFERENCES [HumanResources].[Shift] ([ShiftID])
+ALTER TABLE [HumanResources].[EmployeeDepartmentHistory]
+	CHECK CONSTRAINT [FK_EmployeeDepartmentHistory_Shift_ShiftID]
+
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing Shift.ShiftID', 'SCHEMA', N'HumanResources', 'TABLE', N'EmployeeDepartmentHistory', 'CONSTRAINT', N'FK_EmployeeDepartmentHistory_Shift_ShiftID'
+GO
 CREATE NONCLUSTERED INDEX [IX_EmployeeDepartmentHistory_DepartmentID]
 	ON [HumanResources].[EmployeeDepartmentHistory] ([DepartmentID])
 	ON [PRIMARY]
